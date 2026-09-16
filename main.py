@@ -209,7 +209,6 @@ def main():
     parser.add_argument('--edge_epsilon_ratio', type=float, default=0.2, help="Fraction of total epsilon for edge perturbation when Noise_Scale_adj_perturb is invalid")
     parser.add_argument('--result_file', type=str, default="", help="CSV file for summarized results")
 
-    parser.add_argument('--degree_as_tag', action='store_true', help="The flag of degree as tag")
     parser.add_argument('--Multi_GNN_output_flag_1', action='store_true', help="The flag that module 1 outputs multi GNN results")
 
 
@@ -226,12 +225,11 @@ def main():
     device = torch.device(args.device)
 
     dataset = args.dataset
-    degree_as_tag = args.degree_as_tag
     epsilon_list = [float(item) for item in args.epsilon_list.split(',') if item.strip()]
     for epsilon_item in epsilon_list:
         seed = 0
         fold_idx = 0
-        graphs, num_classes = load_data(dataset, degree_as_tag)
+        graphs, num_classes = load_data(dataset)
         if dataset == 'ECG':
             train_graphs = graphs[:19634][:int(19634*0.4)]
             test_graphs = graphs[19634:][:int(2203*0.4)]

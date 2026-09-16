@@ -616,7 +616,6 @@ def main():
     parser.add_argument("--max_attack_graphs", type=int, default=200)
     parser.add_argument("--nodes_per_graph", type=int, default=8)
     parser.add_argument("--links_per_graph", type=int, default=32)
-    parser.add_argument("--degree_as_tag", action="store_true")
     parser.add_argument("--dpar_alpha", type=float, default=0.15)
     parser.add_argument("--dpar_c1", type=float, default=1.0)
     parser.add_argument("--dpgnn_clip", type=float, default=1.0)
@@ -631,7 +630,7 @@ def main():
 
     set_seed(args.seed)
     device = torch.device(args.device)
-    graphs, num_classes = load_data(args.dataset, args.degree_as_tag)
+    graphs, num_classes = load_data(args.dataset)
     eps_values = [float("inf")] if args.non_dp else parse_float_list(args.epsilon_list)
 
     for epsilon in eps_values:

@@ -59,7 +59,7 @@ def args_for_model(base_args, seed, fold, non_dp):
 
 
 def train_bundle_with_fresh_data(model_args, device, epsilon):
-    graphs, num_classes = load_data(model_args.dataset, model_args.degree_as_tag)
+    graphs, num_classes = load_data(model_args.dataset)
     return train_target_model(model_args, graphs, num_classes, device, epsilon)
 
 
@@ -288,7 +288,6 @@ def main():
     parser.add_argument("--nodes_per_graph", type=int, default=8)
     parser.add_argument("--donor_graphs", type=int, default=200)
     parser.add_argument("--donor_nodes_per_graph", type=int, default=8)
-    parser.add_argument("--degree_as_tag", action="store_true")
     parser.add_argument("--dpar_alpha", type=float, default=0.15)
     parser.add_argument("--dpar_c1", type=float, default=1.0)
     parser.add_argument("--dpgnn_clip", type=float, default=1.0)

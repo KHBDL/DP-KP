@@ -309,7 +309,6 @@ def main():
     parser.add_argument("--max_train_graphs", type=int, default=0)
     parser.add_argument("--max_test_graphs", type=int, default=0)
     parser.add_argument("--max_nodes", type=int, default=0)
-    parser.add_argument("--degree_as_tag", action="store_true")
     parser.add_argument("--dpar_alpha", type=float, default=0.15)
     parser.add_argument("--dpar_c1", type=float, default=1.0)
     parser.add_argument("--dpgnn_clip", type=float, default=1.0)
@@ -335,7 +334,7 @@ def main():
     pprint.pprint(vars(args))
 
     device = torch.device(args.device)
-    graphs, num_classes = load_data(args.dataset, args.degree_as_tag)
+    graphs, num_classes = load_data(args.dataset)
     train_graphs, test_graphs = separate_data(graphs, args.seed, args.Fold)
     train_graphs = limit_graphs(train_graphs, args.max_train_graphs, args.max_nodes, args.seed)
     test_graphs = limit_graphs(test_graphs, args.max_test_graphs, args.max_nodes, args.seed + 1)

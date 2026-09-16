@@ -7,7 +7,7 @@ This repository contains a compact implementation of DP-KP, also referred to as 
 - `fast_tune_pgp.py`: main entry for DP-KP graph classification.
 - `Untils/`: data loading, perturbation, privacy accounting, and model modules.
 - `attack_experiments/run_same_graph_shadow_node_mia.py`: shadow node membership inference attack.
-- `dataset/PROTEINS` and `dataset/NCI1`: small TU-format example datasets for quick testing.
+- `dataset/`: included TU-format graph classification datasets.
 - `results/`: default output folder for generated CSV files.
 
 ## Environment
@@ -60,12 +60,6 @@ python fast_tune_pgp.py \
   --adj_mode exact \
   --epoch_2 20 \
   --Batch_size 128
-```
-
-For larger datasets, add `--degree_as_tag` when node labels are unavailable:
-
-```bash
-python fast_tune_pgp.py --dataset COLLAB --degree_as_tag ...
 ```
 
 ## Privacy Options

@@ -49,13 +49,12 @@ class S2VGraph(object):
 
         self.max_neighbor = 0
 
-def load_data(dataset, degree_as_tag):
+def load_data(dataset):
     if dataset == 'ECG':
         x_train = np.load('./dataset/ECG/X_train.npy')
         x_test = np.load('./dataset/ECG/X_test.npy')
         y_train = np.load('./dataset/ECG/y_train.npy',allow_pickle=True)
         y_test = np.load('./dataset/ECG/y_test.npy',allow_pickle=True)
-        degree_as_tag = False
         print('loading ECG data')
         g_list = []
         label_dict = {}
@@ -126,10 +125,9 @@ def load_data(dataset, degree_as_tag):
             deg_list = list(dict(g.g.degree(range(len(g.g)))).values())
             g.edge_mat = torch.LongTensor(edges).transpose(0,1)
         
-        if degree_as_tag:
-            for g in g_list:
-                g.node_tags = list(dict(g.g.degree).values())
-        
+        for g in g_list:
+            g.node_tags = list(dict(g.g.degree).values())
+
         #Extracting unique tag labels   
         tagset = set([])
         for g in g_list:
@@ -230,10 +228,9 @@ def load_data(dataset, degree_as_tag):
             deg_list = list(dict(g.g.degree(range(len(g.g)))).values())
             g.edge_mat = torch.LongTensor(edges).transpose(0,1)
     
-        if degree_as_tag:
-            for g in g_list:
-                g.node_tags = list(dict(g.g.degree).values())
-    
+        for g in g_list:
+            g.node_tags = list(dict(g.g.degree).values())
+
         #Extracting unique tag labels   
         tagset = set([])
         for g in g_list:

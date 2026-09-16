@@ -210,7 +210,6 @@ def main():
     parser.add_argument("--private_adj_mode", default="raw", choices=["raw", "elementwise"],
                         help="raw perturbs binary A; elementwise perturbs mu*A for private pooling.")
     parser.add_argument("--result_file", default="")
-    parser.add_argument("--degree_as_tag", action="store_true")
     args = parser.parse_args()
 
     random.seed(args.seed)
@@ -231,7 +230,7 @@ def main():
         print("WARNING: --adj_mode random replaces training adjacency with a random graph of the same edge count. Use only for ablation.")
 
     device = torch.device(args.device)
-    graphs, num_classes = load_data(args.dataset, args.degree_as_tag)
+    graphs, num_classes = load_data(args.dataset)
     train_graphs, test_graphs = separate_data(graphs, args.seed, args.Fold)
     train_graphs = limit_graphs(train_graphs, args.max_train_graphs, args.max_nodes, args.seed)
     test_graphs = limit_graphs(test_graphs, args.max_test_graphs, args.max_nodes, args.seed + 1)
